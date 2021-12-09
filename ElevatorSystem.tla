@@ -79,6 +79,11 @@ Deposit ==
       /\ internalRequests' = [internalRequests EXCEPT ![e] = @ \ {r}]
       /\ UNCHANGED <<externalRequests, elevatorFloor, elevatorState>>
 
+Request ==
+  \E e \in Elevator, f \in Floor :
+    /\ internalRequests' = [internalRequests EXCEPT ![e] = @ \union {f}]
+    /\ UNCHANGED <<externalRequests, elevatorFloor, elevatorState>>
+
 Stop ==
   \E e \in Elevator :
     /\ internalRequests[e] = {}
@@ -93,6 +98,7 @@ Next ==
   \/ Ascend
   \/ Descend
   \/ Deposit
+  \/ Request
   \/ Stop
 
 Spec == Init /\ [][Next]_vars
