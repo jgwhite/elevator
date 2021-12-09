@@ -1,0 +1,6 @@
+*.toolbox
+states
+*.dvi
+*.out
+*.pdf
+*.tex
